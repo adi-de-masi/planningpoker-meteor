@@ -1,2 +1,2 @@
 PlayersList = new Mongo.Collection('players');
-FeaturesList = new Mongo.Collection('features');
+VotesList = new Mongo.Collection('votes');

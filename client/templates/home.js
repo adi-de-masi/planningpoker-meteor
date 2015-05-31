@@ -1,13 +1,14 @@
 Template.players.events({
     'submit #players': function (e) {
         e.preventDefault();
-        var username = e.target.username.value;
-        PlayersList.insert({name: username});
+        var username = e.target.username.value,
+          user = PlayersList.find({name:username}).fetch();
+
+        if(user.length===0){
+          PlayersList.insert({name: username});
+        }
+
         Session.set({username: username});
-    },
-    'submit #features': function (e) {
-        e.preventDefault();
-        FeaturesList.insert({name: e.target.feature.value});
     }
 });
 Template.players.helpers({

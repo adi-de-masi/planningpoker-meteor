@@ -1,0 +1,9 @@
+<template name="results">
+  <div class="{{allVotesSubmitted}}">
+    <ul>
+        {{#each votes}}
+          <li>{{username}} : {{points}}</li>
+        {{/each}}
+    </ul>
+  </div>
+</template>
