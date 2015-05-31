@@ -16,8 +16,5 @@ Template.players.helpers({
     },
     'features': function () {
         return FeaturesList.find();
-    },
-   'usernameEntered': function () {
-       return Session.get('username') === undefined ? 'visible' : 'invisible';
-   } 
+    }
 });
