@@ -1,0 +1,30 @@
+<head>
+  <title>planningpoker-meteor</title>
+</head>
+
+<body>
+  <h1>Welcome to Planning Poker!</h1>
+  {{> players}}
+</body>
+
+<template name="players">
+<form id="features">
+    <label for="feature">feature</label>
+    <input id="feature" type="text" />
+    <input type="submit" value="join" class="join"/>
+</form>
+
+<form id="players" class="{{usernameEntered}}">
+    <label for="username">your username</label>
+    <input id="username" type="text" />
+    <input type="submit" value="join" class="join"/>
+</form>
+<h2>users</h2>
+{{#each players}}
+    {{ name }}
+{{/each}}
+<h2>features</h2>
+{{#each features}}
+    {{ name }}
+{{/each}}
+</template>
