@@ -13,11 +13,20 @@
 .value {
     position: absolute;
     margin: auto;
-    top: 0;
+    top: 0;     
     bottom: 0;
     left: 0;
     right: 0;
     height: 17px;
-    width: 15px;
+    width: 15px;    
     overflow: hidden;
-  }
+}
+.vertical-list li {
+    list-style-type: none;
+    float: left;
+    margin: 5px;
+    cursor: pointer;
+}
+.active {
+    background: gray;
+}

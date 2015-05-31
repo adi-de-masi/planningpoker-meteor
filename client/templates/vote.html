@@ -1,10 +1,15 @@
 <template name="vote">
 <div  class="{{voteVisible}}">
     <h1>vote</h1>
-    <form id="vote">
-        <label for="vote">your vote</label>
-        <input id="points" type="number" />
-        <input type="submit" value="vote" />
-    </form>
+    <ul class="vertical-list">
+    {{#each fibonaccis}}
+        {{> card}}
+    {{/each}}
+    </ul>
 </div>
+</template>
+<template name="card">
+    <li class="card {{#if isSelected}}active{{/if}}">
+            <div class="value">{{value}}</div>
+    </li>
 </template>
