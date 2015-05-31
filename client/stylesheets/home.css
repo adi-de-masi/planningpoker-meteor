@@ -4,3 +4,20 @@
 .invisible {
     display: none;
 }
+.card {
+    height: 70px;
+    width: 60px;
+    border: 1px solid #000;
+    position: relative;
+}
+.value {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 17px;
+    width: 15px;
+    overflow: hidden;
+  }
