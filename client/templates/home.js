@@ -8,7 +8,7 @@ Template.players.events({
           PlayersList.insert({name: username});
         }
 
-        Session.set({username: username});
+        Session.setPersistent({username: username});
     }
 });
 Template.players.helpers({
