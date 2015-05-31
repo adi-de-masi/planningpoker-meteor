@@ -1,16 +1,15 @@
 Template.card.events({
-  'submit #vote': function (e) {
-
-    var form = e.target,
-      currentUser = Session.get('username'),
-      points = form.points.value;
-
-    e.preventDefault();
-
-    VotesList.insert({username:currentUser, points:points});
-  },
   'click': function (e,template) {
-      Session.set({'choice': template.data.value});
+      var existingVote, points = template.data.value,
+      currentUser = Session.get('username');
+      Session.set({'choice': points});
+      existingVote = VotesList.findOne({username: currentUser});
+      if (typeof existingVote === 'undefined') {
+        VotesList.insert({username:currentUser, points:points});
+      }
+      else {
+        VotesList.update(existingVote._id, {$set: {points: points}});
+      }
   }
 });
 Template.card.helpers({

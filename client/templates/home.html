@@ -10,11 +10,11 @@
 </body>
 
 <template name="players">
-<form id="players" class="{{usernameEntered}}">
-    <label for="username">your username</label>
-    <input id="username" type="text" />
-    <input type="submit" value="join" class="join"/>
-</form>
+    <form id="players" class="{{usernameEntered}}">
+        <label for="username">your username</label>
+        <input id="username" type="text" />
+        <input type="submit" value="join" class="join"/>
+    </form>
 <h2>users</h2>
 {{#each players}}
     {{ name }}
