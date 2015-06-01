@@ -32,7 +32,12 @@ Router.route('/:roomId/:username', function () {
 
   this.render('voting', {
     data: function () {
-      return {roomId: roomId, username: username, players: PlayersList.find({roomId: this.params.roomId})};
+      return {
+        roomId: roomId,
+        username: username,
+        players: PlayersList.find({roomId: this.params.roomId}),
+        votes: VotesList.find({roomId:this.params.roomId})
+      };
     }
   });
 });

@@ -1,10 +1,13 @@
 <template name="results">
-<h1 style="clear: both">results</h1>
-  <div class="{{displayResults}}">
-    <ul>
-        {{#each votes}}
-          <li>{{username}} : {{points}}</li>
-        {{/each}}
-    </ul>
+  <div style="clear: left;">
+    <h1>results</h1>
+
+    <div class="{{displayResults}}">
+      <ul>
+          {{#each votes}}
+            <li>{{username}} : {{points}}</li>
+          {{/each}}
+      </ul>
+    </div>
   </div>
 </template>
