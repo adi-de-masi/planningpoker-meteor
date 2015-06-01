@@ -13,11 +13,15 @@
   text-align: center;
 }
 .card {
+    transition:0.3s;
     border: 1px solid #000;
     border-radius: 6px;
     height: 200px;
     width: 140px;
     box-shadow:  5px 5px 5px #888888;
+}
+.card:hover{
+    transform:scale(1.1);
 }
 .content {
     background: linear-gradient( 55deg, transparent 50%, #888 50%, transparent 51%),
