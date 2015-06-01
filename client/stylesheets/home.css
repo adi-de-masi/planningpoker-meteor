@@ -31,13 +31,16 @@
     margin: auto;
     z-index: 2;
 }
-
 .vertical-list li {
     list-style-type: none;
     float: left;
     margin: 5px;
     cursor: pointer;
 }
-.active {
+.active .content {
+    background: linear-gradient( 55deg, transparent 50%, #FFF 50%, transparent 51%),
+    linear-gradient( -55deg, transparent 50%, #FFF 50%, transparent 51%), gray;
+}
+.active .value, .active.card {
     background: gray;
 }
