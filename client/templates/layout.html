@@ -1,0 +1,20 @@
+<template name="layout">
+  <header>
+    <div class="container">
+      <h1>Planning Poker</h1>
+      <ul>
+        <li>
+          <a href="/about">About</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="container">
+    <main>
+        {{> players}}
+        {{> vote}}
+        {{> results}}
+    </main>
+  </div>
+</template>

@@ -8,3 +8,5 @@ meteor-platform
 autopublish
 insecure
 u2622:persistent-session
+mizzao:bootstrap-3
+iron:router
