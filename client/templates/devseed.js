@@ -1,0 +1,2 @@
+
+Session.set({currentRoom:'asdf'});
