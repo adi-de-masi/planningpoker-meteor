@@ -1,5 +1,5 @@
-Template.enter.helpers({
-  randomLinks: function(){
+Template.landing.helpers({
+  newRoom: function(){
     return new Mongo.ObjectID().toHexString();
   }
 });

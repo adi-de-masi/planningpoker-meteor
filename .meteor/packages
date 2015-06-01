@@ -7,5 +7,5 @@
 meteor-platform
 autopublish
 insecure
-mizzao:bootstrap-3
 iron:router
+twbs:bootstrap

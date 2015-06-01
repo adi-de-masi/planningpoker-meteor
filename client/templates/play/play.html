@@ -1,3 +1,25 @@
+<template name="play">
+    {{> vote}}
+    {{#each players}}
+        {{ username }}
+    {{/each}}
+    {{> results}}
+</template>
+
+
+<template name="results">
+  <div style="clear: left;">
+    <h1>results</h1>
+
+    <div class="{{displayResults}}">
+      <ul>
+          {{#each votes}}
+            <li>{{username}} : {{points}}</li>
+          {{/each}}
+      </ul>
+    </div>
+  </div>
+</template>
 <template name="vote">
   <div class="header">
     {{currentUser}}
