@@ -4,16 +4,24 @@
 .invisible {
     display: none;
 }
+.header {
+  color: #FFF;
+  background-color: #F00;
+  height: 50px;
+  font-weight: bold;
+  line-height: 50px;
+  text-align: center;
+}
 .card {
-    background-color: #CFCFCF;
     border: 1px solid #000;
     border-radius: 6px;
     height: 200px;
     width: 140px;
+    box-shadow:  5px 5px 5px #888888;
 }
 .content {
-    background: linear-gradient( 55deg, transparent 50%, #FFF 50%, transparent 51%),
-    linear-gradient( -55deg, transparent 50%, #FFF 50%, transparent 51%);
+    background: linear-gradient( 55deg, transparent 50%, #888 50%, transparent 51%),
+    linear-gradient( -55deg, transparent 50%, #888 50%, transparent 51%);
     margin: 15%;
     display: flex;
     align-items: center;
@@ -21,26 +29,34 @@
     height: 80%;
     width: 70%;
 }
+.deck{
+  text-align: center;
+}
 .value {
-    background-color: #CFCFCF;
+    background-color: #FFF;
     border-radius: 100%;
-    color: #FFF;
+    color: #888;
     padding: 25px;
     font-size: 22px;
     font-weight: bold;
     margin: auto;
     z-index: 2;
 }
+.vertical-list {
+  padding: 0;
+  display: inline-block;
+}
 .vertical-list li {
     list-style-type: none;
     float: left;
-    margin: 5px;
+    margin: 10px;
     cursor: pointer;
 }
 .active .content {
-    background: linear-gradient( 55deg, transparent 50%, #FFF 50%, transparent 51%),
-    linear-gradient( -55deg, transparent 50%, #FFF 50%, transparent 51%), gray;
+    background: linear-gradient( 55deg, transparent 50%, #F00 50%, transparent 51%),
+    linear-gradient( -55deg, transparent 50%, #F00 50%, transparent 51%), #FFF;
 }
 .active .value, .active.card {
-    background: gray;
+    color: #F00;
+    background: #FFF;
 }

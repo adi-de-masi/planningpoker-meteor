@@ -1,12 +1,14 @@
 <template name="vote">
-<div>
-    <h1>vote</h1>
+  <div class="header">
+    {{currentUser}}
+  </div>
+  <div class="deck">
     <ul class="vertical-list">
-    {{#each fibonaccis}}
-        {{> card}}
-    {{/each}}
+      {{#each fibonaccis}}
+      {{> card}}
+      {{/each}}
     </ul>
-</div>
+  </div>
 </template>
 <template name="card">
   <li class="card {{#if isSelected}}active{{/if}}">
