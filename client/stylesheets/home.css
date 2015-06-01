@@ -5,22 +5,33 @@
     display: none;
 }
 .card {
-    height: 70px;
-    width: 60px;
+    background-color: #CFCFCF;
     border: 1px solid #000;
-    position: relative;
+    border-radius: 6px;
+    height: 200px;
+    width: 140px;
+}
+.content {
+    background: linear-gradient( 55deg, transparent 50%, #FFF 50%, transparent 51%),
+    linear-gradient( -55deg, transparent 50%, #FFF 50%, transparent 51%);
+    margin: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80%;
+    width: 70%;
 }
 .value {
-    position: absolute;
+    background-color: #CFCFCF;
+    border-radius: 100%;
+    color: #FFF;
+    padding: 25px;
+    font-size: 22px;
+    font-weight: bold;
     margin: auto;
-    top: 0;     
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 17px;
-    width: 15px;    
-    overflow: hidden;
+    z-index: 2;
 }
+
 .vertical-list li {
     list-style-type: none;
     float: left;
