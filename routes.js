@@ -3,7 +3,11 @@ Router.configure({
 });
 
 Router.route('/', function () {
-  this.render('Home', {
-    data: function () { return Items.findOne({_id: this.params._id}); }
+  this.render('enter');
+});
+
+Router.route('/:roomId', function () {
+  this.render('room', {
+    data: function () { return {}; }
   });
 });
