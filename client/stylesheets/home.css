@@ -64,3 +64,16 @@
     color: #F00;
     background: #FFF;
 }
+
+
+.login-panel {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
+    float: none;
+}
+
+.landing{
+    margin-top: 100px;
+}
