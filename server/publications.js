@@ -1,5 +1,5 @@
 Meteor.publish("client", function(userId) {
-  this._session.socket.on("close", Meteor.bindEnvironment(function() {
+  this.onStop(function(){
     PlayersList.remove(userId);
-  }));
+  });
 });
