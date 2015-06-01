@@ -1,3 +1,12 @@
+Template.results.helpers({
+  displayResults: function () {
+    var retVal = PlayersList.find({roomId: this.roomId}).count() === VotesList.find({roomId: this.roomId}).count();
+    return retVal ? 'visible' : 'invisible';
+  }
+
+});
+
+
 Template.card.events({
   'click': function (e, template) {
     var existingVote, points = template.data.value,
@@ -5,9 +14,9 @@ Template.card.events({
       currentUser = Template.parentData(1).username;
 
     Session.set({'choice': points});
-    existingVote = VotesList.findOne({roomId:roomId, username: currentUser});
+    existingVote = VotesList.findOne({roomId: roomId, username: currentUser});
     if (typeof existingVote === 'undefined') {
-      VotesList.insert({roomId:roomId, username: currentUser, points: points});
+      VotesList.insert({roomId: roomId, username: currentUser, points: points});
     }
     else {
       VotesList.update(existingVote._id, {$set: {points: points}});

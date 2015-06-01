@@ -3,11 +3,11 @@ Router.configure({
 });
 
 Router.route('/', function () {
-  this.render('enter');
+  this.render('landing');
 });
 
 Router.route('/:roomId', function () {
-  this.render('room', {
+  this.render('join', {
     data: function () {
       return {roomId: this.params.roomId};
     }
@@ -30,7 +30,7 @@ Router.route('/:roomId/:username', function () {
 
   Meteor.subscribe("client", userId);
 
-  this.render('voting', {
+  this.render('play', {
     data: function () {
       return {
         roomId: roomId,
