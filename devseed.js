@@ -1,5 +1,5 @@
+var currentTeam = TeamsList.find();
 if(Meteor.isServer) {
-	var currentTeam = TeamsList.find();
 	currentTeam.observe({
 		changed: function(team) {
 			var votes,
@@ -24,4 +24,13 @@ if(Meteor.isServer) {
 			}
 		}
 	});
+}
+if(Meteor.isClient) {
+	currentTeam.observe({
+		changed: function(team) {
+			if(team.participantCount !== 0 && team.participantCount === team.voteCount) {
+                Session.set('choice', undefined);
+            }
+        }
+    });
 }

@@ -1,9 +1,4 @@
 <template name="play">
-  <h2>users</h2>
-    {{#each players}}
-        {{ username }}
-    {{/each}}
-
     {{> vote}}
     {{> results}}
     {{> rounds}}
@@ -20,8 +15,6 @@
 
 <template name="results">
   <div style="clear: left;">
-    <h1>results</h1>
-
     <div class="{{displayResults}}">
       <ul>
           {{#each votes}}
@@ -42,6 +35,15 @@
       {{/each}}
     </ul>
   </div>
+  <h1>Round {{currentRound}}: You are up</h1>
+  {{#if choiceMade}}<h2>your choice: {{choice}}</h2>{{/if}}
+  {{#if waiting}}
+    <p>waiting for 
+    {{#each missingPlayers}}
+        username 
+    {{/each}}
+    </p>
+  {{/if}}
 </template>
 
 <template name="card">

@@ -1,3 +1,8 @@
+var getRounds = function () {
+  var roomId = Template.parentData(0).roomId;
+  return RoundsList.find({room: roomId}, {sort: {round: -1}});
+};
+
 Template.results.helpers({
   displayResults: function () {
     var retVal = PlayersList.find({roomId: this.roomId}).count() <= VotesList.find({roomId: this.roomId}).count();
@@ -8,8 +13,7 @@ Template.results.helpers({
 
 Template.rounds.helpers({
     'rounds': function () {
-        var roomId = Template.parentData(0).roomId;
-        return RoundsList.find({room: roomId}, {sort: {round: -1}});
+        return getRounds();
     }
 });
 
@@ -39,6 +43,10 @@ Template.card.helpers({
     return Session.get('choice') === this.value;
   }
 });
+
+var getMissingPlayers = function () {
+    return VotesList.find({room: Template.parentData(0).roomId, round: Session.get('currentRound'), points: undefined}).fetch();
+};
 Template.vote.helpers({
   'fibonaccis': function () {
     return [{value: 1},
@@ -48,7 +56,24 @@ Template.vote.helpers({
       {value: 13},
       {value: 21}];
   },
+  'choiceMade': function () {
+    return Session.get('choice') !== undefined;
+  },
   'choice': function () {
     return Session.get('choice');
+  },
+  'currentRound': function () {
+    var currentRound = getRounds().fetch()[0];
+    if (typeof(currentRound) === 'undefined') {
+        return 0;
+    } else {
+        return currentRound.round + 1;
+    }
+  },
+  'waiting': function () {
+    return getMissingPlayers().length > 0;
+  },
+  'missingPlayers': function () {
+    return getMissingPlayers();
   }
 });
