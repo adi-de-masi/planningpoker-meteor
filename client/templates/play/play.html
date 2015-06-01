@@ -1,0 +1,40 @@
+<template name="play">
+  <h2>users</h2>
+    {{#each players}}
+        {{ name }}
+    {{/each}}
+
+    {{> vote}}
+    {{> results}}
+</template>
+
+
+<template name="results">
+  <div style="clear: left;">
+    <h1>results</h1>
+
+    <div class="{{displayResults}}">
+      <ul>
+          {{#each votes}}
+            <li>{{username}} : {{points}}</li>
+          {{/each}}
+      </ul>
+    </div>
+  </div>
+</template>
+
+<template name="vote">
+  <div>
+    <h1>vote</h1>
+    <ul class="vertical-list">
+        {{#each fibonaccis}}
+            {{> card}}
+        {{/each}}
+    </ul>
+  </div>
+</template>
+<template name="card">
+  <li class="card {{#if isSelected}}active{{/if}}">
+    <div class="value">{{value}}</div>
+  </li>
+</template>
