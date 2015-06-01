@@ -11,7 +11,10 @@
 
 <template name="rounds">
   {{#each rounds}}
-    <p>hui</p>
+  <h2>round: {{round}}</h2><br/>
+    {{#each results}}
+        {{username}}: {{points}}<br/>
+    {{/each}}
   {{/each}}
 </template>
 

@@ -23,18 +23,11 @@ Template.card.events({
 
       Session.set({'choice': points});
 
-      //TODO: round room from teamslist
-      existingVote = VotesList.findOne({room:currentRoom, round:0, username: currentUser});
+      existingVote = VotesList.findOne({room: currentRoom, round: currentRound, username: currentUser});
       if (typeof existingVote === 'undefined') {
         VotesList.insert({room:currentRoom, round:0, username:currentUser, points:points});
         currentTeam = TeamsList.findOne({room: currentRoom});
-        TeamsList.update(currentTeam._id, {$set: {voteCount: currentTeam.voteCount + 1}});
-      }
-      else {
-        VotesList.update(existingVote._id, {$set: {points: points}});
-      }
-      if (typeof existingVote === 'undefined') {
-        VotesList.insert({room: currentRoom, username: currentUser, points: points});
+        TeamsList.update(currentTeam._id, {$set: {voteCount: currentTeam.voteCount + 1, points: points}});
       }
       else {
         VotesList.update(existingVote._id, {$set: {points: points}});
