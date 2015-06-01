@@ -22,7 +22,7 @@ Router.route('/:roomId/:username', function () {
   var username = this.params.username,
     roomId = this.params.roomId,
     user = PlayersList.findOne({name: username}),
-    userId = (user === undefined) ? PlayersList.upsert({roomId: roomId, name: username}) : user._id;
+    userId = (user === undefined) ? PlayersList.insert({roomId: roomId, name: username}) : user._id;
 
   Meteor.subscribe("client", userId);
 
