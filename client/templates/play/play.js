@@ -6,12 +6,18 @@ Template.results.helpers({
 
 });
 
+Template.rounds.helpers({
+    'rounds': function () {
+        var roomId = Template.parentData(0).roomId;
+        return RoundsList.find({room: roomId});
+    }
+});
 
 Template.card.events({
   'click': function (e, template) {
       var existingVote, points = template.data.value,
-      currentUser = Session.get('username'),
-      currentRoom = Session.get('currentRoom'),
+      currentUser = Template.parentData(1).username,
+      currentRoom = Template.parentData(1).roomId,
       currentRound = TeamsList.findOne({room: currentRoom}).round,
       currentTeam;
 
@@ -27,12 +33,12 @@ Template.card.events({
       else {
         VotesList.update(existingVote._id, {$set: {points: points}});
       }
-    if (typeof existingVote === 'undefined') {
-      VotesList.insert({roomId: roomId, username: currentUser, points: points});
-    }
-    else {
-      VotesList.update(existingVote._id, {$set: {points: points}});
-    }
+      if (typeof existingVote === 'undefined') {
+        VotesList.insert({room: currentRoom, username: currentUser, points: points});
+      }
+      else {
+        VotesList.update(existingVote._id, {$set: {points: points}});
+      }
   }
 });
 Template.card.helpers({

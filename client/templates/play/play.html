@@ -6,8 +6,14 @@
 
     {{> vote}}
     {{> results}}
+    {{> rounds}}
 </template>
 
+<template name="rounds">
+  {{#each rounds}}
+    <p>hui</p>
+  {{/each}}
+</template>
 
 <template name="results">
   <div style="clear: left;">
@@ -33,6 +39,7 @@
     </ul>
   </div>
 </template>
+
 <template name="card">
   <li class="card {{#if isSelected}}active{{/if}}">
     <div class="value">{{value}}</div>
