@@ -7,9 +7,12 @@ Router.route('/', function () {
 });
 
 Router.route('/:roomId', function () {
+
+  var roomId = this.params.roomId;
+
   this.render('join', {
     data: function () {
-      return {roomId: this.params.roomId};
+      return {roomId: roomId};
     }
   });
 });
@@ -18,15 +21,8 @@ Router.route('/:roomId/:username', function () {
 
   var username = this.params.username,
     roomId = this.params.roomId,
-    user;
-
-  user = PlayersList.findOne({name: username});
-
-  if (user === undefined) {
-    userId = PlayersList.insert({roomId: roomId, name: username});
-  } else {
-    userId = user._id;
-  }
+    user = PlayersList.findOne({name: username}),
+    userId = (user === undefined) ? PlayersList.upsert({roomId: roomId, name: username}) : user._id;
 
   Meteor.subscribe("client", userId);
 
@@ -35,8 +31,8 @@ Router.route('/:roomId/:username', function () {
       return {
         roomId: roomId,
         username: username,
-        players: PlayersList.find({roomId: this.params.roomId}),
-        votes: VotesList.find({roomId:this.params.roomId})
+        players: PlayersList.find({roomId: roomId}),
+        votes: VotesList.find({roomId: roomId})
       };
     }
   });
