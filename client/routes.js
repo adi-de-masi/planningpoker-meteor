@@ -17,17 +17,18 @@ Router.route('/:roomId', function () {
   });
 });
 
-Router.route('/:roomId/:username', function () {
+Router.route('/:roomId/:username',
+  {
+    template: "play",
+    subscriptions: function() {
+      var username = this.params.username,
+        roomId = this.params.roomId;
+      return Meteor.subscribe("room", username, roomId);
+    },
 
-  var username = this.params.username,
-    roomId = this.params.roomId,
-    user = PlayersList.findOne({name: username}),
-    userId = (user === undefined) ? PlayersList.insert({roomId: roomId, name: username}) : user._id;
-
-  Meteor.subscribe("client", userId);
-
-  this.render('play', {
     data: function () {
+      var username = this.params.username,
+        roomId = this.params.roomId;
       return {
         roomId: roomId,
         username: username,
@@ -35,5 +36,7 @@ Router.route('/:roomId/:username', function () {
         votes: VotesList.find({roomId: roomId})
       };
     }
+
   });
-});
+
+
