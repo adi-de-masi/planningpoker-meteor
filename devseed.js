@@ -6,14 +6,12 @@ if(Meteor.isServer) {
 				results = [];
 			//Increment round and set votes to 0 if all participants have voted
 			if(team.participantCount !== 0 && team.participantCount === team.voteCount) {
-                console.log('haeeee');
 				votes = VotesList.find({room: team.room, round: team.round});
                 votes.forEach(function (item) {
                     var newRecord = {
 						username: item.username,
 						points: item.points
 					};
-                    console.log('inserting vote: ', newRecord);
 					results.push(newRecord);
                 });
 				RoundsList.insert({

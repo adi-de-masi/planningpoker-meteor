@@ -9,7 +9,7 @@ Template.results.helpers({
 Template.rounds.helpers({
     'rounds': function () {
         var roomId = Template.parentData(0).roomId;
-        return RoundsList.find({room: roomId});
+        return RoundsList.find({room: roomId}, {sort: {round: -1}});
     }
 });
 
