@@ -1,13 +1,17 @@
 Template.players.events({
     'submit #players': function (e) {
         e.preventDefault();
+        var userId;
         var username = e.target.username.value,
-          user = PlayersList.find({name:username}).fetch();
+          user = PlayersList.findOne({name:username});
 
-        if(user.length===0){
-          PlayersList.insert({name: username});
+        if(user===undefined){
+          userId = PlayersList.insert({name: username});
+        }else{
+          userId = user._id;
         }
 
+        Meteor.subscribe("client", userId);
         Session.setPersistent({username: username});
     }
 });
