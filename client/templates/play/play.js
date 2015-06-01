@@ -25,7 +25,7 @@ Template.card.events({
 
       existingVote = VotesList.findOne({room: currentRoom, round: currentRound, username: currentUser});
       if (typeof existingVote === 'undefined') {
-        VotesList.insert({room:currentRoom, round:0, username:currentUser, points:points});
+        VotesList.insert({room:currentRoom, round:currentRound, username:currentUser, points:points});
         currentTeam = TeamsList.findOne({room: currentRoom});
         TeamsList.update(currentTeam._id, {$set: {voteCount: currentTeam.voteCount + 1, points: points}});
       }
