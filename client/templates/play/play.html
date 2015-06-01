@@ -51,3 +51,19 @@
     </div>
   </li>
 </template>
+<template name="players">
+  <div class="deck">
+    <ul class="vertical-list">
+      {{#each players}}
+      {{> player}}
+      {{/each}}
+    </ul>
+  </div>
+</template>
+<template name="player">
+  <li class="card {{#if isChosen}}active{{/if}}">
+    <div class="content">
+      <div class="value">{{username}}</div>
+    </div>
+  </li>
+</template>
