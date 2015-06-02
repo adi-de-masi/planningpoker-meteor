@@ -77,3 +77,13 @@
 .landing{
     margin-top: 100px;
 }
+
+.btn-primary{
+    background-color: #f00;
+    border-color: #c00;
+}
+
+.btn-primary:hover{
+    background-color: #b00;
+    border-color: #c00;
+}

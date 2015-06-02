@@ -48,24 +48,22 @@ Template.rounds.helpers({
 // card template
 Template.card.events({
   'click': function (e, template) {
-      var existingVote, points = template.data.value,
+    var existingVote, points = template.data.value,
       currentUser = Template.parentData(1).username,
       currentRoom = Template.parentData(1).roomId,
       currentRound = TeamsList.findOne({room: currentRoom}).round,
       currentTeam, missingPlayers;
 
-      Session.set({'choice': points});
-
-      existingVote = VotesList.findOne({room: currentRoom, round: currentRound, username: currentUser});
-      if (typeof existingVote === 'undefined') {
-        VotesList.insert({room:currentRoom, round:currentRound, username:currentUser, points:points});
-        currentTeam = TeamsList.findOne({room: currentRoom});
-        TeamsList.update(currentTeam._id, {$set: {voteCount: currentTeam.voteCount + 1, points: points}});
-      }
-      else {
-        VotesList.update(existingVote._id, {$set: {points: points}});
-      }
-      Session.set('missingPlayers', getMissingPlayers());
+    Session.set({'choice': points});
+    existingVote = VotesList.findOne({room: currentRoom, round: currentRound, username: currentUser});
+    if (typeof existingVote === 'undefined') {
+      VotesList.insert({room: currentRoom, round: currentRound, username: currentUser, points: points});
+      currentTeam = TeamsList.findOne({room: currentRoom});
+      TeamsList.update(currentTeam._id, {$set: {voteCount: currentTeam.voteCount + 1, points: points}});
+    }
+    else {
+      VotesList.update(existingVote._id, {$set: {points: points}});
+    }
   }
 });
 Template.card.helpers({
@@ -114,13 +112,13 @@ Template.vote.helpers({
 
 // players template
 Template.players.helpers({
-    'players': function () {
-        var team = TeamsList.findOne({room: Template.parentData(1).roomId});
-        if (typeof team !== 'undefined' && team.participants) {
-            return team.participants;
-        }
-        else {
-            return [];
-        }
-    }
+  'players': function () {
+      var team = TeamsList.findOne({room: Template.parentData(1).roomId});
+      if (typeof team !== 'undefined' && team.participants) {
+          return team.participants;
+      }
+      else {
+          return [];
+      }
+  }
 });
