@@ -65,6 +65,9 @@
     color: #F00;
     background: #FFF;
 }
+.active.card {
+    transform: rotateY(180deg);
+}
 
 
 .login-panel {
