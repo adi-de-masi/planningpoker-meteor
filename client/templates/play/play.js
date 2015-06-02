@@ -8,7 +8,6 @@ Template.results.helpers({
     var retVal = PlayersList.find({roomId: this.roomId}).count() <= VotesList.find({roomId: this.roomId}).count();
     return retVal ? 'visible' : 'invisible';
   }
-
 });
 
 Template.rounds.helpers({
@@ -23,7 +22,7 @@ Template.card.events({
       currentUser = Template.parentData(1).username,
       currentRoom = Template.parentData(1).roomId,
       currentRound = TeamsList.findOne({room: currentRoom}).round,
-      currentTeam;
+      currentTeam, missingPlayers;
 
       Session.set({'choice': points});
 
@@ -36,6 +35,7 @@ Template.card.events({
       else {
         VotesList.update(existingVote._id, {$set: {points: points}});
       }
+      Session.set('missingPlayers', getMissingPlayers());
   }
 });
 Template.card.helpers({
@@ -44,8 +44,31 @@ Template.card.helpers({
   }
 });
 
+var getActualPlayers = function () {
+    var team = TeamsList.findOne({room: Template.parentData(1).roomId}),
+        votes,
+        result = [];
+    if (typeof team !== 'undefined') {
+        votes = VotesList.find({room: Template.parentData(1).roomId, round: team.round}).fetch();
+        for (var i = 0; i < votes.length; i++) {
+            result.push(votes[i].username);
+        }
+    }
+    return result;
+};
+
 var getMissingPlayers = function () {
-    return VotesList.find({room: Template.parentData(0).roomId, round: Session.get('currentRound'), points: undefined}).fetch();
+    var team = TeamsList.findOne({room: Template.parentData(1).roomId}), expectedPlayers, actualPlayers;
+    if (typeof(team) !== 'undefined') {
+        expectedPlayers = team.participants;
+    } else {
+        expectedPlayers = [];
+    }
+    actualPlayers = getActualPlayers();
+    var missing = expectedPlayers.filter(function(i, val) {
+      return actualPlayers.indexOf(i) < 0;
+    });
+    return missing;
 };
 Template.vote.helpers({
   'fibonaccis': function () {
@@ -71,9 +94,15 @@ Template.vote.helpers({
     }
   },
   'waiting': function () {
-    return getMissingPlayers().length > 0;
+    var waiting = Session.get('missingPlayers');
+    if (typeof waiting === 'undefined') return true;
+    return waiting.length > 0;
   },
   'missingPlayers': function () {
-    return getMissingPlayers();
+    var missingPlayers = Session.get('missingPlayers');
+    if (typeof missingPlayers === 'undefined') {
+        missingPlayers = getMissingPlayers();
+    }
+    return missingPlayers;
   }
 });

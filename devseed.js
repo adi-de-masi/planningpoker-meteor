@@ -5,7 +5,7 @@ if(Meteor.isServer) {
 			var votes,
 				results = [];
 			//Increment round and set votes to 0 if all participants have voted
-			if(team.participantCount !== 0 && team.participantCount === team.voteCount) {
+			if(team.participants.length > 1 && team.participants.length === team.voteCount) {
 				votes = VotesList.find({room: team.room, round: team.round});
                 votes.forEach(function (item) {
                     var newRecord = {
@@ -28,7 +28,7 @@ if(Meteor.isServer) {
 if(Meteor.isClient) {
 	currentTeam.observe({
 		changed: function(team) {
-			if(team.participantCount !== 0 && team.participantCount === team.voteCount) {
+			if(team.participants.length !== 0 && team.participants.length === team.voteCount) {
                 Session.set('choice', undefined);
             }
         }
