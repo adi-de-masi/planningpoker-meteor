@@ -2,7 +2,7 @@ body {
 	margin: 0;
 	font-family: "Asap";
     font-size: 18px;
-    background: url('/img/background.jpg') top center no-repeat
+    background: url('/img/background.jpg') top center;
 }
 h2 {
   font-size: 40px;
@@ -66,6 +66,16 @@ h2 {
 .deck .card figure.back {
     transform: rotateY(180deg);
 }
+.deck.current .card, .front.content {
+     background: rgba(255, 255, 255, 0.6);
+ }
+.deck.current .card .front .content .value {
+    background: rgba(255, 255, 255, 0.6);
+    z-index: 200;
+}
+.deck.current .card.active, .front.content {
+    background: white;
+}
 .name {
     position: absolute;
     font-weight: bold;
@@ -85,6 +95,9 @@ h2 {
 .bottom.left {
     left: 3%;
     bottom: 0;
+}
+.deck.history .card {
+    background: rgba(255, 255, 255, 0.6);
 }
 .card.active .value {
     font-size: 40px;

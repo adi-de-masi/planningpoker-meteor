@@ -21,7 +21,7 @@
 </template>
 
 <template name="players">
-    <div class="deck">
+    <div class="deck current">
         <ul class="vertical-list">
             {{#each players}}
                 {{> player username=this roomId=../roomId}}
