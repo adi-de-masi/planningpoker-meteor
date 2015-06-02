@@ -88,14 +88,6 @@ Template.vote.helpers({
   'choice': function () {
     return Session.get('choice');
   },
-  'currentRound': function () {
-    var currentRound = getRounds().fetch()[0];
-    if (typeof(currentRound) === 'undefined') {
-        return 0;
-    } else {
-        return currentRound.round + 1;
-    }
-  },
   'waiting': function () {
     var waiting = Session.get('missingPlayers');
     if (typeof waiting === 'undefined') return true;
@@ -139,4 +131,14 @@ Template.player.helpers({
         }
         else return vote.points;
     }
+});
+Template.play.helpers({
+  'currentRound': function () {
+    var currentRound = getRounds().fetch()[0];
+    if (typeof(currentRound) === 'undefined') {
+        return 0;
+    } else {
+        return currentRound.round + 1;
+    }
+  }
 });
