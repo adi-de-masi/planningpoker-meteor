@@ -40,9 +40,10 @@ Template.rounds.helpers({
 // card template
 Template.card.events({
   'click': function (e, template) {
+    debugger;
     var existingVote, points = template.data.value,
-      currentUser = Template.parentData(1).username,
-      currentRoom = Template.parentData(1).roomId,
+      currentUser = template.data.currentUser,
+      currentRoom = template.data.currentRoom,
       currentRound = TeamsList.findOne({room: currentRoom}).round,
       currentTeam, missingPlayers;
 
