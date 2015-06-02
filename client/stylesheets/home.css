@@ -42,6 +42,9 @@
 .card.active {
     transform: rotateY(180deg);
 }
+li.card.active > figure.front {
+    visibility: hidden;
+}
 .card:hover{
     transform:scale(1.1);
 }
