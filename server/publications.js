@@ -1,16 +1,25 @@
 Meteor.publish("room", function (username, roomId) {
-
-  PlayersList.upsert({username:username, roomId:roomId}, {$set:{username:username, roomId:roomId}});
-  var existingTeam = TeamsList.findOne({room: roomId});
+  var existingTeam = TeamsList.findOne({room: roomId}),
+      participants = [];
+  
+  participants.push(username);
   if (typeof(existingTeam) === 'undefined') {
-    TeamsList.insert({room: roomId, round:0, participantCount:1, voteCount:0});
-  } else {
-    TeamsList.update(existingTeam._id, {$set: {participantCount: existingTeam.participantCount + 1}});
+    TeamsList.insert({room: roomId, round:0, participants: participants, voteCount:0});
+  }
+  else {
+    if (existingTeam.participants.lastIndexOf(username) < 0) {
+      existingTeam.participants.push(username);
+      TeamsList.update(existingTeam._id, {$set: {participants: existingTeam.participants}});
+    }
   }
     
   this.onStop(function () {
-    var existingTeam = TeamsList.findOne({room: roomId});
-    PlayersList.remove({username:username, roomId:roomId});
-    TeamsList.update(existingTeam._id, {$set: {participantCount: existingTeam.participantCount - 1}});
+    var existingTeam = TeamsList.findOne({room: roomId}), participants = existingTeam.participants;
+    var userIndex = participants.indexOf(username);
+    if(userIndex != -1) {
+      participants.splice(userIndex, 1);
+    }
+
+    TeamsList.update(existingTeam._id, {$set: {participants: participants}});
   });
 });

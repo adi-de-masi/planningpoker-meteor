@@ -1,9 +1,5 @@
 <template name="play">
-  <h2>users</h2>
-    {{#each players}}
-        {{ username }}
-    {{/each}}
-
+    {{> players}}
     {{> vote}}
     {{> results}}
     {{> rounds}}
@@ -20,8 +16,6 @@
 
 <template name="results">
   <div style="clear: left;">
-    <h1>results</h1>
-
     <div class="{{displayResults}}">
       <ul>
           {{#each votes}}
@@ -31,20 +25,48 @@
     </div>
   </div>
 </template>
-
 <template name="vote">
-  <div>
-    <h1>vote</h1>
+  <div class="header">
+    {{currentUser}}
+  </div>
+  <div class="deck">
     <ul class="vertical-list">
-        {{#each fibonaccis}}
-            {{> card}}
-        {{/each}}
+      {{#each fibonaccis}}
+      {{> card}}
+      {{/each}}
     </ul>
   </div>
+  <h1>Round {{currentRound}}: You are up</h1>
+  {{#if choiceMade}}<h2>your choice: {{choice}}</h2>{{/if}}
+  {{#if waiting}}
+    <p>waiting for 
+    {{#each missingPlayers}}
+       {{this}} 
+    {{/each}}
+    </p>
+  {{/if}}
 </template>
 
 <template name="card">
   <li class="card {{#if isSelected}}active{{/if}}">
-    <div class="value">{{value}}</div>
+    <div class="content">
+      <div class="value">{{value}}</div>
+    </div>
+  </li>
+</template>
+<template name="players">
+  <div class="deck">
+    <ul class="vertical-list">
+      {{#each players}}
+      {{> player}}
+      {{/each}}
+    </ul>
+  </div>
+</template>
+<template name="player">
+  <li class="card {{#if hasChosen}}active{{/if}}">
+    <div class="content">
+      <div class="value">{{this}}</div>
+    </div>
   </li>
 </template>

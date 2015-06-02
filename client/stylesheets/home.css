@@ -4,29 +4,90 @@
 .invisible {
     display: none;
 }
+.header {
+  color: #FFF;
+  background-color: #F00;
+  height: 50px;
+  font-weight: bold;
+  line-height: 50px;
+  text-align: center;
+}
 .card {
-    height: 70px;
-    width: 60px;
+    transition:0.3s;
     border: 1px solid #000;
-    position: relative;
+    border-radius: 6px;
+    height: 200px;
+    width: 140px;
+    box-shadow:  5px 5px 5px #888888;
+    background-color: white;
+}
+.card:hover{
+    transform:scale(1.1);
+}
+.content {
+    background: linear-gradient( 55deg, transparent 50%, #888 50%, transparent 51%),
+    linear-gradient( -55deg, transparent 50%, #888 50%, transparent 51%);
+    margin: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80%;
+    width: 70%;
+}
+.deck{
+  text-align: center;
 }
 .value {
-    position: absolute;
+    background-color: #FFF;
+    border-radius: 100%;
+    color: #888;
+    padding: 25px;
+    font-size: 22px;
+    font-weight: bold;
     margin: auto;
-    top: 0;     
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 17px;
-    width: 15px;    
-    overflow: hidden;
+    z-index: 2;
+}
+.vertical-list {
+  padding: 0;
+  display: inline-block;
 }
 .vertical-list li {
     list-style-type: none;
     float: left;
-    margin: 5px;
+    margin: 10px;
     cursor: pointer;
 }
-.active {
-    background: gray;
+.active .content {
+    background: linear-gradient( 55deg, transparent 50%, #F00 50%, transparent 51%),
+    linear-gradient( -55deg, transparent 50%, #F00 50%, transparent 51%), #FFF;
+}
+.active .value, .active.card {
+    color: #F00;
+    background: #FFF;
+}
+.active.card {
+    transform: rotateY(180deg);
+}
+
+
+.login-panel {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
+    float: none;
+}
+
+.landing{
+    margin-top: 100px;
+}
+
+.btn-primary{
+    background-color: #f00;
+    border-color: #c00;
+}
+
+.btn-primary:hover{
+    background-color: #b00;
+    border-color: #c00;
 }

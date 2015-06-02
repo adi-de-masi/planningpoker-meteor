@@ -1,19 +1,17 @@
+var currentTeam = TeamsList.find();
 if(Meteor.isServer) {
-	var currentTeam = TeamsList.find();
 	currentTeam.observe({
 		changed: function(team) {
 			var votes,
 				results = [];
 			//Increment round and set votes to 0 if all participants have voted
-			if(team.participantCount !== 0 && team.participantCount === team.voteCount) {
-                console.log('haeeee');
+			if(team.participants.length > 1 && team.participants.length === team.voteCount) {
 				votes = VotesList.find({room: team.room, round: team.round});
                 votes.forEach(function (item) {
                     var newRecord = {
 						username: item.username,
 						points: item.points
 					};
-                    console.log('inserting vote: ', newRecord);
 					results.push(newRecord);
                 });
 				RoundsList.insert({
@@ -26,4 +24,13 @@ if(Meteor.isServer) {
 			}
 		}
 	});
+}
+if(Meteor.isClient) {
+	currentTeam.observe({
+		changed: function(team) {
+			if(team.participants.length !== 0 && team.participants.length === team.voteCount) {
+                Session.set('choice', undefined);
+            }
+        }
+    });
 }
