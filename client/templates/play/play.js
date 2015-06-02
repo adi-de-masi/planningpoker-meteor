@@ -33,7 +33,16 @@ var getMissingPlayers = function (roomId) {
     return missing;
 };
 var getVote = function (username) {
-    return Votes.findOne({room: Template.parentData(0).roomId, round: getRound(Template.parentData(0).roomId).round, username: username});
+    var roundRecord = getRound(Template.parentData(0).roomId),
+      round;
+    if(typeof roundRecord === 'undefined') {
+      round = 0;
+    }
+    else {
+      round = roundRecord.round + 1;
+    }
+
+    return Votes.findOne({room: Template.parentData(0).roomId, round: round, username: username});
 };
     
         
@@ -135,7 +144,11 @@ Template.player.helpers({
         else return false;
     },
     'points': function () {
-        return Session.get('choice');
+        var vote = getVote(this.username);
+        if (typeof vote === 'undefined') {
+            return undefined;
+        }
+        else return vote.points;
     }
 });
 Template.play.helpers({
