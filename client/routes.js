@@ -32,7 +32,7 @@ Router.route('/:roomId/:username',
       return {
         roomId: roomId,
         username: username,
-        players: PlayersList.find({roomId: roomId}),
+        players: TeamsList.find({roomId: roomId}).participants,
         votes: VotesList.find({roomId: roomId})
       };
     }

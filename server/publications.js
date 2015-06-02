@@ -1,5 +1,4 @@
 Meteor.publish("room", function (username, roomId) {
-  PlayersList.upsert({username:username, roomId:roomId}, {$set:{username:username, roomId:roomId}});
   var existingTeam = TeamsList.findOne({room: roomId}),
       participants = [];
   participants.push(username);
@@ -16,7 +15,6 @@ Meteor.publish("room", function (username, roomId) {
   this.onStop(function () {
     var existingTeam = TeamsList.findOne({room: roomId}), participants = existingTeam.participants;
     participants.pop(username);
-    PlayersList.remove({username:username, roomId:roomId});
     TeamsList.update(existingTeam._id, {$set: {participants: participants}});
   });
 });
