@@ -1,11 +1,11 @@
 // reusable methods
+var getRound = function (roomId) {
+    return Rounds.findOne({room: roomId}, {sort: {round: -1}});
+};
 var getRounds = function (roomId) {
   return Rounds.find({room: roomId}, {sort: {round: -1}});
 };
-var getRounds = function () {
-  var roomId = Template.parentData(0).roomId;
-  return Rounds.find({room: roomId}, {sort: {round: -1}});
-};
+
 var getActualPlayers = function (roomId) {
     var team = Teams.findOne({room: roomId}),
         votes,
@@ -33,7 +33,7 @@ var getMissingPlayers = function (roomId) {
     return missing;
 };
 var getVote = function (username) {
-    return Votes.findOne({room: Template.parentData(1).roomId, round: getRound(), username: username});
+    return Votes.findOne({room: Template.parentData(0).roomId, round: getRound(Template.parentData(0).roomId).round, username: username});
 };
     
         
@@ -90,7 +90,7 @@ Template.vote.helpers({
   },
 
   'currentRound': function () {
-    var currentRound = getRounds(this.roomId).fetch()[0];
+    var currentRound = getRound(this.roomId);
     if (typeof(currentRound) === 'undefined') {
         return 0;
     } else {
@@ -135,16 +135,12 @@ Template.player.helpers({
         else return false;
     },
     'points': function () {
-        vote = getVote(this.toString());
-        if (typeof vote === 'undefined') {
-            return undefined;
-        }
-        else return vote.points;
+        return Session.get('choice');
     }
 });
 Template.play.helpers({
   'currentRound': function () {
-    var currentRound = getRounds().fetch()[0];
+    var currentRound = getRound(Template.parentData(1).roomId);
     if (typeof(currentRound) === 'undefined') {
         return 0;
     } else {
