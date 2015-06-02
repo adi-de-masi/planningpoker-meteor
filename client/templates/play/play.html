@@ -2,80 +2,76 @@
   <div class="header">
     {{currentUser}}
   </div>
-    {{> vote roomId=../roomId username=../username}}
+    {{> availableCards roomId=../roomId username=../username}}
   <h2>round: {{currentRound}}</h2><br/>
     {{> players roomId=../roomId}}
     {{> results}}
     {{> rounds roomId=../roomId}}
 </template>
 
+<template name="availableCards">
+    <h2>Round {{currentRound}}: You are up</h2>
+    <div class="deck">
+        <ul class="vertical-list">
+            {{#each fibonaccis}}
+                {{> card currentRoom=../roomId currentUser=../username value=value cssClass='available'}}
+            {{/each}}
+        </ul>
+    </div>
+    {{#if choiceMade}}<h2>your choice: {{choice}}</h2>{{/if}}
+</template>
+
+<template name="players">
+    <div class="deck">
+        <ul class="vertical-list">
+            {{#each players}}
+                {{> player username=this roomId=../roomId}}
+            {{/each}}
+        </ul>
+    </div>
+</template>
+<template name="player">
+    <li class="card {{#if hasChosen}}active{{/if}}">
+        <figure class="front">
+            <div class="content">
+                <div class="value">{{this.username}}</div>
+            </div>
+        </figure>
+        <figure class="back">
+        <div class="content">
+        <div class="value">{{points}}</div>
+        </div>
+        </figure >
+    </li>
+</template>
+
+<template name="results">
+    <h1>hoi</h1>
+    <div style="clear: left;">
+        <div class="{{displayResults}}">
+            <ul>
+                {{#each votes}}
+                    <li>{{username}} : {{points}}</li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</template>
+
 <template name="rounds">
   {{#each rounds}}
-    <h2>{{round}}</h2>
     {{#each results}}
         {{username}}: {{points}}<br/>
     {{/each}}
   {{/each}}
 </template>
 
-<template name="results">
-  <div style="clear: left;">
-    <div class="{{displayResults}}">
-      <ul>
-          {{#each votes}}
-            <li>{{username}} : {{points}}</li>
-          {{/each}}
-      </ul>
-    </div>
-  </div>
-</template>
-<template name="vote">
-  <h2>Round {{currentRound}}: You are up</h2>
-  <div class="deck">
-    <ul class="vertical-list">
-      {{#each fibonaccis}}
-        {{> card currentRoom=../roomId currentUser=../username value=value}}
-      {{/each}}
-    </ul>
-  </div>
-  {{#if choiceMade}}<h2>your choice: {{choice}}</h2>{{/if}}
-  {{#if waiting}}
-    <p>waiting for 
-    {{#each missingPlayers}}
-       {{this}} 
-    {{/each}}
-    </p>
-  {{/if}}
-</template>
-
 <template name="card">
 {{roomId}}
-  <li class="card {{#if isSelected}}active{{/if}}">
+  <li class="card {{cssClass}} {{#if isSelected}}active{{/if}}">
     <div class="content">
       <div class="value">{{value}}</div>
     </div>
   </li>
 </template>
-<template name="players">
-  <div class="deck">
-    <ul class="vertical-list">
-      {{#each players}}
-      {{> player username=this roomId=../roomId}}
-      {{/each}}
-    </ul>
-  </div>
-</template>
-<template name="player">
-  <li class="card {{#if hasChosen}}active{{/if}}">
-    <figure class="front">
-      <div class="content">
-          <div class="value">{{this.username}}</div>
-      </div>
-    </figure>
-    <figure class="back">
-      <div class="content">   
-          <div class="value">{{points}}</div>
-      </div>
-    </figure >
-  </li>
-</template>
+
