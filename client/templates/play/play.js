@@ -40,7 +40,6 @@ Template.rounds.helpers({
 // card template
 Template.card.events({
   'click': function (e, template) {
-    debugger;
     var existingVote, points = template.data.value,
       currentUser = template.data.currentUser,
       currentRoom = template.data.currentRoom,
