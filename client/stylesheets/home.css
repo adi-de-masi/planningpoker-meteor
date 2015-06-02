@@ -57,7 +57,30 @@ h2 {
 .deck .card figure.back {
     transform: rotateY(180deg);
 }
-
+.name {
+    position: absolute;
+    font-weight: bold;
+}
+.name.top.left {
+    left: 3%;
+    top: 0;
+}
+.top.right {
+    right: 3%;
+    top: 0;
+}
+.name.bottom.right {
+    right: 0%;
+    bottom: 0;
+}
+.bottom.left {
+    left: 3%;
+    bottom: 0;
+}
+.card.active .value {
+    font-size: 40px;
+    font-weight: bold;
+}
 li.card.active > figure.front {
     visibility: hidden;
 }
