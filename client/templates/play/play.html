@@ -1,8 +1,8 @@
 <template name="play">
-    {{> players}}
-    {{> vote}}
+    {{> players roomId=../roomId}}
+    {{> vote roomId=../roomId username=../username}}
     {{> results}}
-    {{> rounds}}
+    {{> rounds roomId=../roomId}}
 </template>
 
 <template name="rounds">
@@ -59,7 +59,7 @@
   <div class="deck">
     <ul class="vertical-list">
       {{#each players}}
-      {{> player}}
+      {{> player username=this roomId=../roomId}}
       {{/each}}
     </ul>
   </div>
@@ -67,7 +67,7 @@
 <template name="player">
   <li class="card {{#if hasChosen}}active{{/if}}">
     <div class="content">
-      <div class="value">{{this}}</div>
+      <div class="value">{{this.username}}</div>
     </div>
   </li>
 </template>

@@ -1,14 +1,13 @@
 // reusable methods
-var getRounds = function () {
-  var roomId = Template.parentData(0).roomId;
+var getRounds = function (roomId) {
   return RoundsList.find({room: roomId}, {sort: {round: -1}});
 };
-var getActualPlayers = function () {
-    var team = TeamsList.findOne({room: Template.parentData(1).roomId}),
+var getActualPlayers = function (roomId) {
+    var team = TeamsList.findOne({room: roomId}),
         votes,
         result = [];
     if (typeof team !== 'undefined') {
-        votes = VotesList.find({room: Template.parentData(1).roomId, round: team.round}).fetch();
+        votes = VotesList.find({room: roomId, round: team.round}).fetch();
         for (var i = 0; i < votes.length; i++) {
             result.push(votes[i].username);
         }
@@ -16,14 +15,14 @@ var getActualPlayers = function () {
     return result;
 };
 
-var getMissingPlayers = function () {
-    var team = TeamsList.findOne({room: Template.parentData(1).roomId}), expectedPlayers, actualPlayers;
+var getMissingPlayers = function (roomId) {
+    var team = TeamsList.findOne({room: roomId}), expectedPlayers, actualPlayers;
     if (typeof(team) !== 'undefined') {
         expectedPlayers = team.participants;
     } else {
         expectedPlayers = [];
     }
-    actualPlayers = getActualPlayers();
+    actualPlayers = getActualPlayers(roomId);
     var missing = expectedPlayers.filter(function(i, val) {
       return actualPlayers.indexOf(i) < 0;
     });
@@ -33,7 +32,7 @@ var getMissingPlayers = function () {
 // rounds template
 Template.rounds.helpers({
     'rounds': function () {
-        return getRounds();
+        return getRounds(this.roomId);
     }
 });
 
@@ -45,7 +44,6 @@ Template.card.events({
       currentRoom = template.data.currentRoom,
       currentRound = TeamsList.findOne({room: currentRoom}).round,
       currentTeam, missingPlayers;
-
     Session.set({'choice': points});
     existingVote = VotesList.findOne({room: currentRoom, round: currentRound, username: currentUser});
     if (typeof existingVote === 'undefined') {
@@ -81,7 +79,7 @@ Template.vote.helpers({
     return Session.get('choice');
   },
   'currentRound': function () {
-    var currentRound = getRounds().fetch()[0];
+    var currentRound = getRounds(this.roomId).fetch()[0];
     if (typeof(currentRound) === 'undefined') {
         return 0;
     } else {
@@ -96,7 +94,7 @@ Template.vote.helpers({
   'missingPlayers': function () {
     var missingPlayers = Session.get('missingPlayers');
     if (typeof missingPlayers === 'undefined') {
-        missingPlayers = getMissingPlayers();
+        missingPlayers = getMissingPlayers(this.roomId);
     }
     return missingPlayers;
   }
@@ -105,7 +103,7 @@ Template.vote.helpers({
 // players template
 Template.players.helpers({
   'players': function () {
-      var team = TeamsList.findOne({room: Template.parentData(1).roomId});
+      var team = TeamsList.findOne({room: this.roomId});
       if (typeof team !== 'undefined' && team.participants) {
           return team.participants;
       }
@@ -117,8 +115,8 @@ Template.players.helpers({
 Template.player.helpers({
     'hasChosen': function () {
         var round, vote;
-        round = TeamsList.findOne({room: Template.parentData(1).roomId}).round;
-        vote = VotesList.findOne({room: Template.parentData(1).roomId, round: round, username: this.toString()});
+        round = TeamsList.findOne({room: this.roomId}).round;
+        vote = VotesList.findOne({room: this.roomId, round: round, username: this.username});
         if (typeof vote !== 'undefined') {
             return true;
         }
