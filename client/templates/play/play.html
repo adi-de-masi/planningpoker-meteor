@@ -3,9 +3,8 @@
     {{currentUser}}
   </div>
     {{> availableCards roomId=../roomId username=../username}}
-  <h2>round: {{currentRound}}</h2><br/>
+  <h2>Round: {{currentRound}}</h2><br/>
     {{> players roomId=../roomId}}
-    {{> results}}
     {{> rounds roomId=../roomId}}
 </template>
 
@@ -49,24 +48,26 @@
     </li>
 </template>
 
-<template name="results">
-    <h1>hoi</h1>
-    <div style="clear: left;">
-        <div class="{{displayResults}}">
-            <ul>
-                {{#each votes}}
-                    <li>{{username}} : {{points}}</li>
-                {{/each}}
-            </ul>
-        </div>
-    </div>
-</template>
-
 <template name="rounds">
   {{#each rounds}}
-    {{#each results}}
-        {{username}}: {{points}}<br/>
-    {{/each}}
+      <h2>Round {{this.round}}</h2>
+      <div class="deck">
+          <ul class="vertical-list">
+            {{#each results}}
+                <li class="card">
+                  <figure>
+                      <div class="content">
+                          <div class="name top left">{{username}}</div>
+                          <div class="name top right">{{points}}</div>
+                          <div class="value">{{points}}</div>
+                          <div class="name bottom left">{{points}}</div>
+                          <div class="name bottom right">{{username}}</div>
+                      </div>
+                  </figure>
+                </li>
+            {{/each}}
+          </ul>
+      </div>
   {{/each}}
 </template>
 
