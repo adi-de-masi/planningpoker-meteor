@@ -4,6 +4,14 @@ body {
   font-size: 18px;
   background: url('/img/background.jpg') top center no-repeat
 }
+
+.branding{
+  margin-bottom: 100px;
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 60px;
+}
+
 h2 {
   font-size: 40px;
   padding: 15px 0;
@@ -151,11 +159,6 @@ li.card.active > figure.front {
   float: none;
 }
 
-.title-landing{
-  text-align: center;
-  color: #FFFFFF;
-  font-size: 60px;
-}
 
 .btn-center{
   padding: 15px 24px;
