@@ -2,16 +2,8 @@ body {
   margin: 0;
   font-family: "Asap";
   font-size: 18px;
-  background: url('/img/background.jpg') top center no-repeat
+  background: url('/img/background.jpg') top center;
 }
-
-.branding{
-  margin-bottom: 100px;
-  text-align: center;
-  color: #FFFFFF;
-  font-size: 60px;
-}
-
 h2 {
   font-size: 40px;
   padding: 15px 0;
@@ -74,6 +66,16 @@ h2 {
 .deck .card figure.back {
   transform: rotateY(180deg);
 }
+.deck.current .card, .front.content {
+  background: rgba(255, 255, 255, 0.6);
+}
+.deck.current .card .front .content .value {
+  background: rgba(255, 255, 255, 0.6);
+  z-index: 200;
+}
+.deck.current .card.active, .front.content {
+  background: white;
+}
 .name {
   position: absolute;
   font-weight: bold;
@@ -86,21 +88,30 @@ h2 {
   right: 3%;
   top: 0;
 }
+
 .name.bottom.right {
   right: 0%;
   bottom: 0;
 }
+
 .bottom.left {
   left: 3%;
   bottom: 0;
 }
+
+.deck.history .card {
+  background: rgba(255, 255, 255, 0.6);
+}
+
 .card.active .value {
   font-size: 40px;
   font-weight: bold;
 }
+
 li.card.active > figure.front {
   visibility: hidden;
 }
+
 .card.available.active{
   -webkit-transition: 0.3s;
   -moz-transition: 0.3s;
@@ -109,6 +120,7 @@ li.card.active > figure.front {
   transition: 0.3s;
   transform:scale(1.1);
 }
+
 .content {
   background: linear-gradient( 55deg, transparent 50%, #888 50%, transparent 51%),
   linear-gradient( -55deg, transparent 50%, #888 50%, transparent 51%);
@@ -119,9 +131,11 @@ li.card.active > figure.front {
   height: 80%;
   width: 70%;
 }
+
 .deck{
   text-align: center;
 }
+
 .value {
   background-color: #FFF;
   border-radius: 100%;
@@ -132,20 +146,24 @@ li.card.active > figure.front {
   margin: auto;
   z-index: 2;
 }
+
 .vertical-list {
   padding: 0;
   display: inline-block;
 }
+
 .vertical-list li {
   list-style-type: none;
   float: left;
   margin: 10px;
   cursor: pointer;
 }
+
 .active .content {
   background: linear-gradient( 55deg, transparent 50%, #F00 50%, transparent 51%),
   linear-gradient( -55deg, transparent 50%, #F00 50%, transparent 51%), #FFF;
 }
+
 .active .value, .active.card {
   color: #F00;
   background: #FFF;
@@ -159,6 +177,11 @@ li.card.active > figure.front {
   float: none;
 }
 
+.title-landing{
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 60px;
+}
 
 .btn-center{
   padding: 15px 24px;
