@@ -1,17 +1,17 @@
 // reusable methods
 var getRound = function () {
-    return TeamsList.findOne({room: Template.parentData(1).roomId}).round;
+    return Teams.findOne({room: Template.parentData(1).roomId}).round;
 };
 var getRounds = function () {
   var roomId = Template.parentData(0).roomId;
-  return RoundsList.find({room: roomId}, {sort: {round: -1}});
+  return Rounds.find({room: roomId}, {sort: {round: -1}});
 };
 var getActualPlayers = function () {
-    var team = TeamsList.findOne({room: Template.parentData(1).roomId}),
+    var team = Teams.findOne({room: Template.parentData(1).roomId}),
         votes,
         result = [];
     if (typeof team !== 'undefined') {
-        votes = VotesList.find({room: Template.parentData(1).roomId, round: team.round}).fetch();
+        votes = Votes.find({room: Template.parentData(1).roomId, round: team.round}).fetch();
         for (var i = 0; i < votes.length; i++) {
             result.push(votes[i].username);
         }
@@ -20,7 +20,7 @@ var getActualPlayers = function () {
 };
 
 var getMissingPlayers = function () {
-    var team = TeamsList.findOne({room: Template.parentData(1).roomId}), expectedPlayers, actualPlayers;
+    var team = Teams.findOne({room: Template.parentData(1).roomId}), expectedPlayers, actualPlayers;
     if (typeof(team) !== 'undefined') {
         expectedPlayers = team.participants;
     } else {
@@ -33,7 +33,7 @@ var getMissingPlayers = function () {
     return missing;
 };
 var getVote = function (username) {
-    return VotesList.findOne({room: Template.parentData(1).roomId, round: getRound(), username: username});
+    return Votes.findOne({room: Template.parentData(1).roomId, round: getRound(), username: username});
 };
     
         
@@ -51,18 +51,18 @@ Template.card.events({
     var existingVote, points = template.data.value,
       currentUser = Template.parentData(1).username,
       currentRoom = Template.parentData(1).roomId,
-      currentRound = TeamsList.findOne({room: currentRoom}).round,
+      currentRound = Teams.findOne({room: currentRoom}).round,
       currentTeam, missingPlayers;
 
     Session.set({'choice': points});
-    existingVote = VotesList.findOne({room: currentRoom, round: currentRound, username: currentUser});
+    existingVote = Votes.findOne({room: currentRoom, round: currentRound, username: currentUser});
     if (typeof existingVote === 'undefined') {
-      VotesList.insert({room: currentRoom, round: currentRound, username: currentUser, points: points});
-      currentTeam = TeamsList.findOne({room: currentRoom});
-      TeamsList.update(currentTeam._id, {$set: {voteCount: currentTeam.voteCount + 1, points: points}});
+      Votes.insert({room: currentRoom, round: currentRound, username: currentUser, points: points});
+      currentTeam = Teams.findOne({room: currentRoom});
+      Teams.update(currentTeam._id, {$set: {voteCount: currentTeam.voteCount + 1, points: points}});
     }
     else {
-      VotesList.update(existingVote._id, {$set: {points: points}});
+      Votes.update(existingVote._id, {$set: {points: points}});
     }
   }
 });
@@ -105,7 +105,7 @@ Template.vote.helpers({
 // players template
 Template.players.helpers({
   'players': function () {
-      var team = TeamsList.findOne({room: Template.parentData(1).roomId});
+      var team = Teams.findOne({room: Template.parentData(1).roomId});
       if (typeof team !== 'undefined' && team.participants) {
           return team.participants;
       }
