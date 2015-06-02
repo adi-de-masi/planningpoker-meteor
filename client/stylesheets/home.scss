@@ -1,34 +1,60 @@
 body {
-	margin: 0;
-	font-family: "Asap";
-    font-size: 18px;
-    background: url('/img/background.jpg') top center no-repeat
-}
-h2 {
-  font-size: 40px;
-  padding: 15px 0;
-  text-align: center;
-  color: #FFF;
+  margin: 0;
+  font-family: "Asap";
+  font-size: 18px;
+  background: url('/img/background.jpg') top center no-repeat
 }
 
-.join{
+.round{
+  .current{
+    color: #FFF;
+    font-size: 40px;
+    padding: 15px 0;
     text-align: center;
+  }
 }
 
-.join input[type=text]{
-    padding: 35px 20px 35px 20px;
-    font-size: 22px;
+.results{
+  .title{
+    color: #FFF;
+    font-size: 40px;
+    padding: 15px 0;
+    text-align: center;
+  }
 }
+
+.availableCards {
+  color: #FFF;
+
+  .choice {
+    font-size: 40px;
+    padding: 15px 0;
+    text-align: center;
+  }
+
+  .title {
+    font-size: 40px;
+    padding: 15px 0;
+    text-align: center;
+  }
+
+}
+
+.join {
+  text-align: center;
+}
+
+.join input[type=text] {
+  padding: 35px 20px 35px 20px;
+  font-size: 22px;
+}
+
 .container {
-   	width: 1000px;
-	margin: 0 auto;
+  width: 1000px;
+  margin: 0 auto;
 }
-.visible {
-    display: auto;
-}
-.invisible {
-    display: none;
-}
+
+
 .header {
   color: #FFF;
   background-color: #F00;
@@ -37,131 +63,143 @@ h2 {
   line-height: 50px;
   text-align: center;
 }
+
 .card {
-    position: relative;
-    transition:0.3s;
-    height: 200px;
-    width: 140px;
-    transform-style: preserve-3d;
-    border: 1px solid #000;
-    border-radius: 6px;
-    box-shadow:  5px 5px 5px #888888;
-    background-color: white;
+  position: relative;
+  transition: 0.3s;
+  height: 200px;
+  width: 140px;
+  transform-style: preserve-3d;
+  border: 1px solid #000;
+  border-radius: 6px;
+  box-shadow: 5px 5px 5px #888888;
+  background-color: white;
 }
+
 .card figure {
-    display: block;
-    position: absolute;
-    height: 100%; 
-    width: 100%;
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
+
 .card figure, .card figure > * {
-    backface-visibility: hidden;
+  backface-visibility: hidden;
 }
+
 .deck.card.active {
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
+
 .deck .active.card {
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
+
 .deck .card figure.back {
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
 
 li.card.active > figure.front {
-    visibility: hidden;
+  visibility: hidden;
 }
-.card.available.active{
-    -webkit-transition: 0.3s;
-    -moz-transition: 0.3s;
-    -ms-transition: 0.3s;
-    -o-transition: 0.3s;
-    transition: 0.3s;
-    transform:scale(1.1);
+
+.card.available.active {
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  transform: scale(1.1);
 }
+
 .content {
-    background: linear-gradient( 55deg, transparent 50%, #888 50%, transparent 51%),
-    linear-gradient( -55deg, transparent 50%, #888 50%, transparent 51%);
-    margin: 15%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 80%;
-    width: 70%;
+  background: linear-gradient(55deg, transparent 50%, #888 50%, transparent 51%),
+  linear-gradient(-55deg, transparent 50%, #888 50%, transparent 51%);
+  margin: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80%;
+  width: 70%;
 }
-.deck{
+
+.deck {
   text-align: center;
 }
+
 .value {
-    background-color: #FFF;
-    border-radius: 100%;
-    color: #888;
-    padding: 25px;
-    font-size: 22px;
-    font-weight: bold;
-    margin: auto;
-    z-index: 2;
+  background-color: #FFF;
+  border-radius: 100%;
+  color: #888;
+  padding: 25px;
+  font-size: 22px;
+  font-weight: bold;
+  margin: auto;
+  z-index: 2;
 }
+
 .vertical-list {
   padding: 0;
   display: inline-block;
 }
+
 .vertical-list li {
-    list-style-type: none;
-    float: left;
-    margin: 10px;
-    cursor: pointer;
+  list-style-type: none;
+  float: left;
+  margin: 10px;
+  cursor: pointer;
 }
+
 .active .content {
-    background: linear-gradient( 55deg, transparent 50%, #F00 50%, transparent 51%),
-    linear-gradient( -55deg, transparent 50%, #F00 50%, transparent 51%), #FFF;
+  background: linear-gradient(55deg, transparent 50%, #F00 50%, transparent 51%),
+  linear-gradient(-55deg, transparent 50%, #F00 50%, transparent 51%), #FFF;
 }
+
 .active .value, .active.card {
-    color: #F00;
-    background: #FFF;
+  color: #F00;
+  background: #FFF;
 }
 
 .login-panel {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 80px;
-    float: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 80px;
+  float: none;
 }
 
-.title-landing{
-    text-align: center;
-    color: #FFFFFF;
-    font-size: 60px;
+.title-landing {
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 60px;
+  margin-bottom: 100px;
 }
 
-.btn-center{
-    padding: 15px 24px;
-    font-size: 22px;
+.btn-center {
+  padding: 15px 24px;
+  font-size: 22px;
 }
 
 .join .btn-center {
-    margin-top: 35px;
+  margin-top: 35px;
 }
 
-.btn-landing{
-    margin-top: 100px;
+.btn-primary {
+  background-color: #f00;
+  border-color: #c00;
 }
 
-.btn-primary{
-    background-color: #f00;
-    border-color: #c00;
+.btn-primary:hover {
+  background-color: #b00;
+  border-color: #c00;
 }
 
-.btn-primary:hover{
-    background-color: #b00;
-    border-color: #c00;
+.intro {
+  color: #FFFFFF;
+  text-align: center;
+  margin-top: 100px;
 }
 
-.intro{
-    color: #FFFFFF;
-    text-align: center;
-    margin-top: 100px;
-}
 .intro a {
-    color: #CCCCCC;
+  color: #CCCCCC;
 }

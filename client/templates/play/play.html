@@ -1,73 +1,79 @@
 <template name="play">
-  <div class="header">
-    {{currentUser}}
-  </div>
+  <div class="round">
+    <div class="header">
+      {{currentUser}}
+    </div>
     {{> availableCards roomId=../roomId username=../username}}
-  <h2>round: {{currentRound}}</h2><br/>
+    <h2 class="current">round: {{currentRound}}</h2><br/>
     {{> players roomId=../roomId}}
     {{> results}}
     {{> rounds roomId=../roomId}}
+  </div>
 </template>
 
 <template name="availableCards">
-    <h2>Round {{currentRound}}: You are up</h2>
+  <div class="availableCards">
+    <h2 class="title">Round {{currentRound}}: You are up</h2>
+
     <div class="deck">
-        <ul class="vertical-list">
-            {{#each fibonaccis}}
-                {{> card currentRoom=../roomId currentUser=../username value=value cssClass='available'}}
-            {{/each}}
-        </ul>
+      <ul class="vertical-list">
+        {{#each fibonaccis}}
+          {{> card currentRoom=../roomId currentUser=../username value=value cssClass='available'}}
+        {{/each}}
+      </ul>
     </div>
-    {{#if choiceMade}}<h2>your choice: {{choice}}</h2>{{/if}}
+    {{#if choiceMade}}<h2 class="choice">your choice: {{choice}}</h2>{{/if}}
+  </div>
 </template>
 
 <template name="players">
-    <div class="deck">
-        <ul class="vertical-list">
-            {{#each players}}
-                {{> player username=this roomId=../roomId}}
-            {{/each}}
-        </ul>
-    </div>
+  <div class="deck">
+    <ul class="vertical-list">
+      {{#each players}}
+        {{> player username=this roomId=../roomId}}
+      {{/each}}
+    </ul>
+  </div>
 </template>
 <template name="player">
-    <li class="card {{#if hasChosen}}active{{/if}}">
-        <figure class="front">
-            <div class="content">
-                <div class="value">{{this.username}}</div>
-            </div>
-        </figure>
-        <figure class="back">
-        <div class="content">
+  <li class="card {{#if hasChosen}}active{{/if}}">
+    <figure class="front">
+      <div class="content">
+        <div class="value">{{this.username}}</div>
+      </div>
+    </figure>
+    <figure class="back">
+      <div class="content">
         <div class="value">{{points}}</div>
-        </div>
-        </figure >
-    </li>
+      </div>
+    </figure>
+  </li>
 </template>
 
 <template name="results">
-    <h1>hoi</h1>
+  <div class="results">
     <div style="clear: left;">
-        <div class="{{displayResults}}">
-            <ul>
-                {{#each votes}}
-                    <li>{{username}} : {{points}}</li>
-                {{/each}}
-            </ul>
-        </div>
+      <div class="{{displayResults}}">
+        <ul>
+          {{#each votes}}
+            <li>{{username}} : {{points}}</li>
+          {{/each}}
+        </ul>
+      </div>
     </div>
+  </div>
 </template>
 
 <template name="rounds">
   {{#each rounds}}
     {{#each results}}
-        {{username}}: {{points}}<br/>
+      {{username}}: {{points}}<br/>
     {{/each}}
   {{/each}}
 </template>
 
 <template name="card">
-{{roomId}}
+  {{roomId}}
   <li class="card {{cssClass}} {{#if isSelected}}active{{/if}}">
     <div class="content">
       <div class="value">{{value}}</div>
