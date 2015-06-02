@@ -1,5 +1,6 @@
 {
-  "landing_btn-enter": "Start planning...",
+  "title":"Planning Poker",
+  "landing_btn-enter": "Start planning",
   "join_lbl-username": "Username",
   "join_plc-username": "Enter a username",
   "join_btn-submit": "Join the table"

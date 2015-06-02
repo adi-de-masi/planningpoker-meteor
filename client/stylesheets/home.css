@@ -1,6 +1,6 @@
 body {
 	margin: 0;
-	font-family: "Courier";
+	font-family: "Asap";
     font-size: 18px;
     background: url('/img/background.jpg') top center no-repeat
 }
@@ -9,6 +9,15 @@ h2 {
   padding: 15px 0;
   text-align: center;
   color: #FFF;
+}
+
+.join{
+    text-align: center;
+}
+
+.join input[type=text]{
+    padding: 35px 20px 35px 20px;
+    font-size: 22px;
 }
 .container {
    	width: 1000px;
@@ -114,7 +123,22 @@ li.card.active > figure.front {
     float: none;
 }
 
-.landing{
+.title-landing{
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 60px;
+}
+
+.btn-center{
+    padding: 15px 24px;
+    font-size: 22px;
+}
+
+.join .btn-center {
+    margin-top: 35px;
+}
+
+.btn-landing{
     margin-top: 100px;
 }
 
@@ -126,4 +150,13 @@ li.card.active > figure.front {
 .btn-primary:hover{
     background-color: #b00;
     border-color: #c00;
+}
+
+.intro{
+    color: #FFFFFF;
+    text-align: center;
+    margin-top: 100px;
+}
+.intro a {
+    color: #CCCCCC;
 }
