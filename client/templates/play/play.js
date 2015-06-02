@@ -73,7 +73,7 @@ Template.card.helpers({
 });
 
 // vote template
-Template.vote.helpers({
+Template.availableCards.helpers({
   'fibonaccis': function () {
     return [{value: 1},
       {value: 3},

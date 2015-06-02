@@ -46,22 +46,27 @@ h2 {
     width: 100%;
 }
 .card figure, .card figure > * {
-    
     backface-visibility: hidden;
 }
-.card figure.front {
-}
-.card figure.back {
-    transform: rotateY(180deg);
-    color: blue;
-}
-.card.active {
+.deck.card.active {
     transform: rotateY(180deg);
 }
+.deck .active.card {
+    transform: rotateY(180deg);
+}
+.deck .card figure.back {
+    transform: rotateY(180deg);
+}
+
 li.card.active > figure.front {
     visibility: hidden;
 }
-.card:hover{
+.card.available.active{
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
     transform:scale(1.1);
 }
 .content {
