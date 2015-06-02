@@ -30,14 +30,6 @@ var getMissingPlayers = function () {
     return missing;
 };
 
-// results template
-Template.results.helpers({
-  displayResults: function () {
-    var retVal = PlayersList.find({roomId: this.roomId}).count() <= VotesList.find({roomId: this.roomId}).count();
-    return retVal ? 'visible' : 'invisible';
-  }
-});
-
 // rounds template
 Template.rounds.helpers({
     'rounds': function () {
@@ -121,4 +113,15 @@ Template.players.helpers({
           return [];
       }
   }
+});
+Template.player.helpers({
+    'hasChosen': function () {
+        var round, vote;
+        round = TeamsList.findOne({room: Template.parentData(1).roomId}).round;
+        vote = VotesList.findOne({room: Template.parentData(1).roomId, round: round, username: this.toString()});
+        if (typeof vote !== 'undefined') {
+            return true;
+        }
+        else return false;
+    }
 });

@@ -19,6 +19,7 @@
     height: 200px;
     width: 140px;
     box-shadow:  5px 5px 5px #888888;
+    background-color: white;
 }
 .card:hover{
     transform:scale(1.1);
