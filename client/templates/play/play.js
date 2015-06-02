@@ -149,6 +149,9 @@ Template.player.helpers({
             return undefined;
         }
         else return vote.points;
+    },
+    'isMyCard': function() {
+        return this.username === Template.parentData(3).username;
     }
 });
 Template.play.helpers({

@@ -60,7 +60,7 @@ h2 {
 .deck.card.active {
     transform: rotateY(180deg);
 }
-.deck .active.card {
+.deck .active.card.mycard {
     transform: rotateY(180deg);
 }
 .deck .card figure.back {

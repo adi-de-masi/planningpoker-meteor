@@ -31,7 +31,8 @@
     </div>
 </template>
 <template name="player">
-    <li class="card {{#if hasChosen}}active{{/if}}">
+    {{#if isMyCard}}
+    <li class="card mycard {{#if hasChosen}}active{{/if}}">
         <figure class="front">
             <div class="content">
                 <div class="value">{{this.username}}</div>
@@ -47,6 +48,13 @@
         </div>
         </figure >
     </li>
+    {{else}}
+    <li class="card {{#if hasChosen}}active{{/if}}">
+      <div class="content">
+        <div class="value">{{this.username}}</div>
+      </div>
+  </li>
+    {{/if}}
 </template>
 
 <template name="results">
