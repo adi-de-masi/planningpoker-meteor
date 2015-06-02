@@ -13,13 +13,34 @@
   text-align: center;
 }
 .card {
+    position: relative;
     transition:0.3s;
-    border: 1px solid #000;
-    border-radius: 6px;
     height: 200px;
     width: 140px;
+    transform-style: preserve-3d;
+    border: 1px solid #000;
+    border-radius: 6px;
     box-shadow:  5px 5px 5px #888888;
     background-color: white;
+}
+.card figure {
+    display: block;
+    position: absolute;
+    height: 100%; 
+    width: 100%;
+}
+.card figure, .card figure > * {
+    
+    backface-visibility: hidden;
+}
+.card figure.front {
+}
+.card figure.back {
+    transform: rotateY(180deg);
+    color: blue;
+}
+.card.active {
+    transform: rotateY(180deg);
 }
 .card:hover{
     transform:scale(1.1);
@@ -65,10 +86,6 @@
     color: #F00;
     background: #FFF;
 }
-.active.card {
-    transform: rotateY(180deg);
-}
-
 
 .login-panel {
     display: block;

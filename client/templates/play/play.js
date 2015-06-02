@@ -1,4 +1,7 @@
 // reusable methods
+var getRound = function () {
+    return TeamsList.findOne({room: Template.parentData(1).roomId}).round;
+};
 var getRounds = function () {
   var roomId = Template.parentData(0).roomId;
   return RoundsList.find({room: roomId}, {sort: {round: -1}});
@@ -29,6 +32,11 @@ var getMissingPlayers = function () {
     });
     return missing;
 };
+var getVote = function (username) {
+    return VotesList.findOne({room: Template.parentData(1).roomId, round: getRound(), username: username});
+};
+    
+        
 
 // rounds template
 Template.rounds.helpers({
@@ -117,11 +125,18 @@ Template.players.helpers({
 Template.player.helpers({
     'hasChosen': function () {
         var round, vote;
-        round = TeamsList.findOne({room: Template.parentData(1).roomId}).round;
-        vote = VotesList.findOne({room: Template.parentData(1).roomId, round: round, username: this.toString()});
+        round = getRound();
+        vote = getVote(this.toString());
         if (typeof vote !== 'undefined') {
             return true;
         }
         else return false;
+    },
+    'points': function () {
+        vote = getVote(this.toString());
+        if (typeof vote === 'undefined') {
+            return undefined;
+        }
+        else return vote.points;
     }
 });
