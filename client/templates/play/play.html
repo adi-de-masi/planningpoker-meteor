@@ -1,13 +1,17 @@
 <template name="play">
-    {{> players roomId=../roomId}}
+  <div class="header">
+    {{currentUser}}
+  </div>
     {{> vote roomId=../roomId username=../username}}
+  <h2>round: {{currentRound}}</h2><br/>
+    {{> players roomId=../roomId}}
     {{> results}}
     {{> rounds roomId=../roomId}}
 </template>
 
 <template name="rounds">
   {{#each rounds}}
-  <h2>round: {{round}}</h2><br/>
+    <h2>{{round}}</h2>
     {{#each results}}
         {{username}}: {{points}}<br/>
     {{/each}}
@@ -26,9 +30,7 @@
   </div>
 </template>
 <template name="vote">
-  <div class="header">
-    {{currentUser}}
-  </div>
+  <h2>Round {{currentRound}}: You are up</h2>
   <div class="deck">
     <ul class="vertical-list">
       {{#each fibonaccis}}
@@ -36,7 +38,6 @@
       {{/each}}
     </ul>
   </div>
-  <h1>Round {{currentRound}}: You are up</h1>
   {{#if choiceMade}}<h2>your choice: {{choice}}</h2>{{/if}}
   {{#if waiting}}
     <p>waiting for 
@@ -66,8 +67,15 @@
 </template>
 <template name="player">
   <li class="card {{#if hasChosen}}active{{/if}}">
-    <div class="content">
-      <div class="value">{{this.username}}</div>
-    </div>
+    <figure class="front">
+      <div class="content">
+          <div class="value">{{this.username}}</div>
+      </div>
+    </figure>
+    <figure class="back">
+      <div class="content">   
+          <div class="value">{{points}}</div>
+      </div>
+    </figure >
   </li>
 </template>

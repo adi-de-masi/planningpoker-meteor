@@ -1,3 +1,18 @@
+body {
+	margin: 0;
+	font-family: "Asap";
+    background: url('/img/background.jpg') top center no-repeat
+}
+h2 {
+  font-size: 40px;
+  padding: 15px 0;
+  text-align: center;
+  color: #FFF;
+}
+.container {
+   	width: 1000px;
+	margin: 0 auto;
+}
 .visible {
     display: auto;
 }
@@ -13,13 +28,37 @@
   text-align: center;
 }
 .card {
+    position: relative;
     transition:0.3s;
-    border: 1px solid #000;
-    border-radius: 6px;
     height: 200px;
     width: 140px;
+    transform-style: preserve-3d;
+    border: 1px solid #000;
+    border-radius: 6px;
     box-shadow:  5px 5px 5px #888888;
     background-color: white;
+}
+.card figure {
+    display: block;
+    position: absolute;
+    height: 100%; 
+    width: 100%;
+}
+.card figure, .card figure > * {
+    
+    backface-visibility: hidden;
+}
+.card figure.front {
+}
+.card figure.back {
+    transform: rotateY(180deg);
+    color: blue;
+}
+.card.active {
+    transform: rotateY(180deg);
+}
+li.card.active > figure.front {
+    visibility: hidden;
 }
 .card:hover{
     transform:scale(1.1);
@@ -65,10 +104,6 @@
     color: #F00;
     background: #FFF;
 }
-.active.card {
-    transform: rotateY(180deg);
-}
-
 
 .login-panel {
     display: block;
