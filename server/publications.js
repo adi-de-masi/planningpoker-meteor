@@ -1,6 +1,7 @@
 Meteor.publish("room", function (username, roomId) {
   var existingTeam = TeamsList.findOne({room: roomId}),
       participants = [];
+  
   participants.push(username);
   if (typeof(existingTeam) === 'undefined') {
     TeamsList.insert({room: roomId, round:0, participants: participants, voteCount:0});
@@ -14,7 +15,11 @@ Meteor.publish("room", function (username, roomId) {
     
   this.onStop(function () {
     var existingTeam = TeamsList.findOne({room: roomId}), participants = existingTeam.participants;
-    participants.pop(username);
+    var userIndex = participants.indexOf(username);
+    if(userIndex != -1) {
+      participants.splice(userIndex, 1);
+    }
+
     TeamsList.update(existingTeam._id, {$set: {participants: participants}});
   });
 });
