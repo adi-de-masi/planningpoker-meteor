@@ -1,19 +1,12 @@
 <template name="join">
-
-    <div class="panel panel-default login-panel col-xs-12 col-sm-6">
-      <div class="panel-body">
-        <form id="login">
-
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input id="username" class="form-control" type="text" placeholder="Username"/>
-          </div>
-
-          <input type="submit" value="join" class="join btn btn-lg btn-primary"/>
-        </form>
-
-      </div>
-
+  <div class="panel panel-default login-panel col-xs-12 col-sm-6">
+    <div class="panel-body">
+      <form id="login">
+        <div class="form-group">
+          <input id="username" class="form-control" type="text" placeholder="{{_ "join_plc-username"}}"/>
+        </div>
+        <input type="submit" value="{{_ "join_btn-submit"}}" class="join btn btn-lg btn-primary"/>
+      </form>
     </div>
-
+  </div>
 </template>

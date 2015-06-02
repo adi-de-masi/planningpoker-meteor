@@ -9,3 +9,5 @@ autopublish
 insecure
 iron:router
 twbs:bootstrap
+tap:i18n
+tap:i18n-ui
