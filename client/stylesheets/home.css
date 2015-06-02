@@ -1,6 +1,7 @@
 body {
 	margin: 0;
-	font-family: "Asap";
+	font-family: "Courier";
+    font-size: 18px;
     background: url('/img/background.jpg') top center no-repeat
 }
 h2 {

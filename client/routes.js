@@ -1,6 +1,9 @@
 Router.configure({
-  layoutTemplate: 'layout'
+  layoutTemplate: 'layout',
+  notFoundTemplate: 'notFound',
+  loadingTemplate: 'loading'
 });
+
 
 Router.route('/', function () {
   this.render('landing');
@@ -20,7 +23,7 @@ Router.route('/:roomId', function () {
 Router.route('/:roomId/:username',
   {
     template: "play",
-    subscriptions: function() {
+    subscriptions: function () {
       var username = this.params.username,
         roomId = this.params.roomId;
       return Meteor.subscribe("room", username, roomId);
