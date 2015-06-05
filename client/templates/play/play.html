@@ -16,9 +16,9 @@
         </ul>
     </div>
     {{#if choiceMade}}
-      <h2>{{currentRound}}. Runde: du bist am Zug </h2>
-    {{else}}
       <h2>{{currentRound}}. Runde: du hast gewählt</h2>
+    {{else}}
+      <h2>{{currentRound}}. Runde: du bist am Zug </h2>
     {{/if}}
 </template>
 
@@ -60,7 +60,7 @@
 
 <template name="rounds">
   {{#each rounds}}
-      <h2>Round {{this.round}}</h2>
+      <h2>{{this.round}}. Runde</h2>
       <div class="deck">
           <ul class="vertical-list">
             {{#each results}}

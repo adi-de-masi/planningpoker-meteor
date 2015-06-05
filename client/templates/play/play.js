@@ -3,7 +3,7 @@ var getRound = function (roomId) {
     return Rounds.findOne({room: roomId}, {sort: {round: -1}});
 };
 var getRounds = function (roomId) {
-  return Rounds.find({room: roomId}, {sort: {round: -1}});
+  return Rounds.find({room: roomId}, {sort: {round: -1}, limit: 1});
 };
 
 var getActualPlayers = function (roomId) {
