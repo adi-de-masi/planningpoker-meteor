@@ -19,19 +19,6 @@ var getActualPlayers = function (roomId) {
     return result;
 };
 
-var getMissingPlayers = function (roomId) {
-    var team = Teams.findOne({room: roomId}), expectedPlayers, actualPlayers;
-    if (typeof(team) !== 'undefined') {
-        expectedPlayers = team.participants;
-    } else {
-        expectedPlayers = [];
-    }
-    actualPlayers = getActualPlayers(roomId);
-    var missing = expectedPlayers.filter(function(i, val) {
-      return actualPlayers.indexOf(i) < 0;
-    });
-    return missing;
-};
 var getVote = function (username) {
     var roundRecord = getRound(Template.parentData(0).roomId),
       round;
@@ -105,19 +92,6 @@ Template.availableCards.helpers({
     } else {
         return currentRound.round + 1;
     }
-  },
-
-  'waiting': function () {
-    var waiting = Session.get('missingPlayers');
-    if (typeof waiting === 'undefined') return true;
-    return waiting.length > 0;
-  },
-  'missingPlayers': function () {
-    var missingPlayers = Session.get('missingPlayers');
-    if (typeof missingPlayers === 'undefined') {
-        missingPlayers = getMissingPlayers(this.roomId);
-    }
-    return missingPlayers;
   }
 });
 
