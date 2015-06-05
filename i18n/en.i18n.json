@@ -3,5 +3,7 @@
   "landing_btn-enter": "Start planning",
   "join_lbl-username": "Username",
   "join_plc-username": "Enter a username",
-  "join_btn-submit": "Join the table"
+  "join_btn-submit": "Join the table",
+  "play_lbl-choose": "Round: make your choice",
+  "play_lbl-chosen": "Round: you have chosen"
 }
