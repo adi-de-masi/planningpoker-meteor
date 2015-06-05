@@ -3,21 +3,23 @@
     {{currentUser}}
   </div>
     {{> availableCards roomId=../roomId username=../username}}
-  <h2>Round: {{currentRound}}</h2><br/>
     {{> players roomId=../roomId}}
     {{> rounds roomId=../roomId}}
 </template>
 
 <template name="availableCards">
-    <h2>Round {{currentRound}}: You are up</h2>
-    <div class="deck">
+    <div class="deck available-cards">
         <ul class="vertical-list">
             {{#each fibonaccis}}
                 {{> card currentRoom=../roomId currentUser=../username value=value cssClass='available'}}
             {{/each}}
         </ul>
     </div>
-    {{#if choiceMade}}<h2>your choice: {{choice}}</h2>{{/if}}
+    {{#if choiceMade}}
+      <h2>{{currentRound}}. Runde: du bist am Zug </h2>
+    {{else}}
+      <h2>{{currentRound}}. Runde: du hast gewählt</h2>
+    {{/if}}
 </template>
 
 <template name="players">

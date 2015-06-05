@@ -128,8 +128,12 @@ li.card.active > figure.front {
   width: 70%;
 }
 
-.deck{
+.deck {
   text-align: center;
+}
+
+.deck.available-cards {
+  background-color: #FFFFFF;  
 }
 
 .value {
@@ -146,6 +150,7 @@ li.card.active > figure.front {
 .vertical-list {
   padding: 0;
   display: inline-block;
+  padding-top: 10px
 }
 
 .vertical-list li {
