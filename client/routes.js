@@ -26,12 +26,22 @@ Router.route('/:roomId/:username',
     subscriptions: function () {
       var username = this.params.username,
         roomId = this.params.roomId;
+
+      if(username.length >4) {
+        username = username.substring(0,3);
+      }
+
       return Meteor.subscribe("room", username, roomId);
     },
 
     data: function () {
       var username = this.params.username,
         roomId = this.params.roomId;
+
+      if(username.length >4) {
+        username = username.substring(0,3);
+      }
+
       return {
         roomId: roomId,
         username: username,
